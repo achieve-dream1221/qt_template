@@ -8,11 +8,10 @@
 
 #include <QStyleFactory>
 #include "mainwindow.h"
-#include "ui/ui_MainWindow.h"
+#include "ui_MainWindow.h"
 
 
-MainWindow::MainWindow(QWidget *parent) :
-        QWidget(parent), ui(new Ui::MainWindow) {
+MainWindow::MainWindow(QWidget *parent) : QWidget(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 }
 

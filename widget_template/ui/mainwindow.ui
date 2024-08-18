@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../cmake-build-debug/.qt/rcc/imageresources.qrc">
+   <iconset resource="../../cmake-build-debug/widget_template/.qt/rcc/imageresources.qrc">
     <normaloff>:/images/images/img.png</normaloff>
     <normalon>:/images/images/img.png</normalon>:/images/images/img.png</iconset>
   </property>
@@ -127,7 +127,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../cmake-build-debug/.qt/rcc/imageresources.qrc"/>
+  <include location="../../cmake-build-debug/widget_template/.qt/rcc/imageresources.qrc"/>
  </resources>
  <connections>
   <connection>
