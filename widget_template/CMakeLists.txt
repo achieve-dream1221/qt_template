@@ -3,21 +3,19 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets LinguistTools)
 # 指定搜索路径列表 https://cmake.org/cmake/help/latest/prop_tgt/AUTOUIC_SEARCH_PATHS.html#prop_tgt:AUTOUIC_SEARCH_PATHS
 set(CMAKE_AUTOUIC_SEARCH_PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ui")
 
-file(GLOB HEADERS
-        include/mainwindow.h
+set(HEADERS
+        #        include/mainwindow.h
+        include/languagetest.h
 )
-file(GLOB UIS
-        ui/mainwindow.ui
+set(UIS
+        #        ui/mainwindow.ui
+        ui/languagetest.ui
 )
 
-file(GLOB SOURCES
-        src/mainwindow.cpp
+set(SOURCES
+        #        src/mainwindow.cpp
+        src/languagetest.cpp
         main.cpp
-)
-
-file(GLOB I18N
-        i18n/en-US.ts
-        i18n/zh-CN.ts
 )
 
 qt_add_executable(HelloWidget
@@ -26,7 +24,6 @@ qt_add_executable(HelloWidget
         ${UIS}
 )
 
-
 target_include_directories(HelloWidget PRIVATE include)
 
 qt_add_resources(HelloWidget imageresources
@@ -34,7 +31,11 @@ qt_add_resources(HelloWidget imageresources
         FILES images/img.png
 )
 
-#qt_add_translations(HelloWidget TS_FILES I18N)
+set(I18N
+        i18n/zh-CN.ts
+)
+
+qt_add_translations(HelloWidget TS_FILES ${I18N})
 
 target_link_libraries(HelloWidget PRIVATE Qt6::Widgets)
 
