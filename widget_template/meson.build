@@ -20,9 +20,12 @@ src = files(
     'src/languagetest.cpp',
 )
 
-ts = files(
+ts = [
     'i18n/zh-CN.ts'
-)
+]
+
+# 根据当前目录生成ts文件
+run_command('lupdate', '.', '-ts', ts, check : true)
 
 #windows = import('windows')
 #rc = windows.compile_resources('logo.rc')
