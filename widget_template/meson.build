@@ -1,6 +1,3 @@
-# qt
-# https://mesonbuild.com/Qt6-module.html
-qt6 = import('qt6')
 qt6_dep = dependency('qt6', modules : ['Core', 'Widgets', 'Gui'], main : true) # main:true, 隐藏控制台
 
 inc = include_directories('include')

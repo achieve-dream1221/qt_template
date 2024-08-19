@@ -8,4 +8,4 @@ find_package(Qt6 REQUIRED COMPONENTS Core)
 qt_standard_project_setup(REQUIRES 6.5)
 
 add_subdirectory(widget_template)
-#add_subdirectory(quick_template)
+add_subdirectory(quick_template)
