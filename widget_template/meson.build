@@ -18,7 +18,7 @@ src = files(
 )
 
 ts = [
-    'i18n/zh-CN.ts'
+    'i18n/zh_CN.ts'
 ]
 
 # 根据当前目录生成ts文件
