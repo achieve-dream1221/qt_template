@@ -4,17 +4,14 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets LinguistTools)
 set(CMAKE_AUTOUIC_SEARCH_PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ui")
 
 set(HEADERS
-        #        include/mainwindow.h
-        include/languagetest.h
+        include/mainwindow.h
 )
 set(UIS
-        #        ui/mainwindow.ui
-        ui/languagetest.ui
+        ui/mainwindow.ui
 )
 
 set(SOURCES
-        #        src/mainwindow.cpp
-        src/languagetest.cpp
+        src/mainwindow.cpp
         main.cpp
 )
 
@@ -32,7 +29,7 @@ qt_add_resources(HelloWidget imageresources
 )
 
 set(I18N
-        i18n/zh-CN.ts
+        i18n/en_US.ts
 )
 
 qt_add_translations(HelloWidget TS_FILES ${I18N})

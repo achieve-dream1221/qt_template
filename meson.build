@@ -1,4 +1,4 @@
-project('qt_cmake_template', 'cpp',
+project('qt_template', 'cpp',
         default_options : ['warning_level=3', 'cpp_std=c++20'],
         version : '0.1.0')
 # qt
