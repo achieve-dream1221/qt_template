@@ -1,42 +1,68 @@
+# 单个项目可取消下面几行的注释
+#cmake_minimum_required(VERSION 3.28)
+#project(项目名称)
+#
+#set(CMAKE_CXX_STANDARD 20)
+##参考: https://doc.qt.io/qt-6/cmake-get-started.html
+#find_package(Qt6 REQUIRED COMPONENTS Core)
+#
+#qt_standard_project_setup(REQUIRES 6.5)
+
 find_package(Qt6 REQUIRED COMPONENTS Widgets LinguistTools)
 
 # 指定搜索路径列表 https://cmake.org/cmake/help/latest/prop_tgt/AUTOUIC_SEARCH_PATHS.html#prop_tgt:AUTOUIC_SEARCH_PATHS
 set(CMAKE_AUTOUIC_SEARCH_PATHS "${CMAKE_CURRENT_SOURCE_DIR}/ui")
 
-set(HEADERS
-        include/mainwindow.h
-)
-set(UIS
-        ui/mainwindow.ui
-)
+# 设置APP的名称
+set(APP_NAME HelloWidget)
 
+# 需要MOC编译的头文件, 即包含了Q_OBJECT的头文件, 放置到moc_include目录下, 源文件放到src目录下
+# 搜索moc_include目录下的所有.h文件, 并编译
+file(GLOB MOC_HEADERS moc_include/*.h) # 更方便
+#set(MOC_HEADERS # 更推荐, 手动添加
+#        moc_include/mainwindow.h
+#)
+# 需要编译的ui文件
+file(GLOB UI_FILES "ui/*.ui")
+
+# 搜索src目录下的所有cpp文件, 并编译
+file(GLOB SRC src/*.cpp) # 方便但不推荐
+#set(SRC # 更推荐, 手动添加
+#     src/mainwindow.cpp
+#)
+# 需要编译的源文件
 set(SOURCES
-        src/mainwindow.cpp
+        logo.rc # logo文件
         main.cpp
+        ${SRC}
 )
 
-qt_add_executable(HelloWidget
+# 给目标添加资源文件
+qt_add_resources(QRC_FILES resources.qrc)
+# qt可执行文件
+qt_add_executable(${APP_NAME}
         ${SOURCES}
-        ${HEADERS}
-        ${UIS}
+        ${MOC_HEADERS}
+        ${UI_FILES}
+        ${QRC_FILES}
 )
 
-target_include_directories(HelloWidget PRIVATE include)
+# 需要添加的翻译文件
+set(I18N i18n/en_US.ts)
 
-qt_add_resources(HelloWidget imageresources
-        PREFIX "/images"
-        FILES images/img.png
-)
+# 给目标添加翻译
+qt_add_translations(${APP_NAME} TS_FILES ${I18N})
 
-set(I18N
-        i18n/en_US.ts
-)
+target_include_directories(${APP_NAME} PRIVATE include moc_include)
 
-qt_add_translations(HelloWidget TS_FILES ${I18N})
+target_link_libraries(${APP_NAME} PRIVATE Qt6::Widgets Qt6::Core)
 
-target_link_libraries(HelloWidget PRIVATE Qt6::Widgets)
-
-set_target_properties(HelloWidget PROPERTIES
-        WIN32_EXECUTABLE ON # 阻止在 Windows 上创建控制台窗口。
+set_target_properties(${APP_NAME} PROPERTIES
+        WIN32_EXECUTABLE OFF # 阻止在 Windows 上创建控制台窗口。
         MACOSX_BUNDLE ON # 在 macOS 上创建应用程序包。
 )
+
+# 需要exe加载的的文件, 从data目录复制到编译的data目录
+install(DIRECTORY data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+# 当你运行 cmake --build 时，CMake 自动生成了一个 install 目标。你可以直接通过调用构建工具的安装目标来安装：
+#cmake --build cmake-build-debug\ --target install
