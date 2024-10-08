@@ -62,7 +62,7 @@ set_target_properties(${APP_NAME} PROPERTIES
         MACOSX_BUNDLE ON # 在 macOS 上创建应用程序包。
 )
 
-# 需要exe加载的的文件, 从data目录复制到编译的data目录
-install(DIRECTORY data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-# 当你运行 cmake --build 时，CMake 自动生成了一个 install 目标。你可以直接通过调用构建工具的安装目标来安装：
-#cmake --build cmake-build-debug\ --target install
+# 复制文件到可执行文件所在目录在生成目标可执行文件之后自动执行
+#add_custom_command(TARGET ${APP_NAME} POST_BUILD
+#        COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/data  # 复制data到可执行文件目录
+#)
